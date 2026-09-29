@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Observatoire des cyclosportives</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&family=Barlow+Semi+Condensed:ital,wght@0,600;0,700;1,700;1,800&display=swap">
+<style>
+:root{--bg:#070a16;--card:#0f1430;--ink:#f4f5fa;--mut:#9aa1bd;--line:#232a52;--acc:#ffd800;--acc2:#ffd800;--bar:#ffd800;--hl:#1a2050;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;color:var(--ink);font:15px/1.45 Barlow,system-ui,sans-serif;background:radial-gradient(900px 420px at 85% -5%,#1c2560 0,transparent 70%),repeating-linear-gradient(115deg,transparent 0 46px,rgba(255,216,0,.03) 46px 48px),var(--bg)}
+.hero{position:relative;overflow:hidden;background:linear-gradient(120deg,#0b1130,#131d55 60%,#0b1130);border-bottom:4px solid var(--acc);padding:42px 16px 100px}
+.hero .in{position:relative;z-index:2;max-width:1200px;margin:0 auto}
+.hero:before,.hero:after{content:"";position:absolute;top:0;height:100%;transform:skewX(-22deg);background:var(--acc);z-index:1}
+.hero:before{right:12%;width:16px}.hero:after{right:calc(12% + 38px);width:6px;opacity:.5}
+.prof{position:absolute;left:0;bottom:0;width:100%;height:110px;z-index:1}
+.eyebrow{display:inline-block;background:var(--acc);color:#0d1226;font:800 12px "Barlow Semi Condensed",sans-serif;letter-spacing:.14em;text-transform:uppercase;padding:3px 12px;transform:skewX(-18deg);margin-bottom:14px}
+h1{font:800 clamp(34px,6vw,64px)/.95 "Barlow Semi Condensed",sans-serif;font-style:italic;text-transform:uppercase;margin:0 0 12px}
+h1 em{color:var(--acc)}
+.sub{color:#c9cee3;margin:0;max-width:560px;font-weight:600}
+main{max-width:1200px;margin:-58px auto 0;padding:0 16px 56px;position:relative;z-index:3}
+h2{font:800 24px "Barlow Semi Condensed",sans-serif;font-style:italic;text-transform:uppercase;margin:0 0 12px}
+.warn{background:rgba(255,216,0,.08);border-left:4px solid var(--acc);padding:9px 14px;margin-bottom:18px;font-size:13.5px}
+.warn code{color:var(--acc)}
+.kpis{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.kpi{position:relative;background:var(--card);border:1px solid var(--line);border-left:0;padding:10px 16px 10px 20px;min-width:120px;clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%)}
+.kpi:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--acc)}
+.kpi b{display:block;font:800 32px "Barlow Semi Condensed",sans-serif;font-style:italic;color:var(--acc)}
+.kpi span{color:var(--mut);font-size:12.5px;text-transform:uppercase;letter-spacing:.05em}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+input,select,button{font:inherit;color:var(--ink);background:#0b1030;border:1px solid var(--line);border-radius:4px;padding:7px 10px}
+input[type=checkbox]{accent-color:var(--acc)}
+button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,th:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
+#cmpb{background:var(--acc);color:#0d1226;border:0;font:800 14px "Barlow Semi Condensed",sans-serif;font-style:italic;text-transform:uppercase;letter-spacing:.05em;padding:8px 18px;transform:skewX(-10deg)}
+.wrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-top:3px solid var(--acc)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:8px 10px;text-align:left;white-space:nowrap;border-bottom:1px solid var(--line)}
+th{cursor:pointer;font:700 12px "Barlow Semi Condensed",sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);position:sticky;top:0;background:#0b1030}
+th:hover{color:var(--acc)}
+td.n,th.n{text-align:right}
+tr.row{cursor:pointer}tr.row:hover,tr.sel{background:var(--hl)}
+tr.isaso td:first-child{box-shadow:inset 3px 0 var(--acc)}
+.aso{display:inline-block;background:var(--acc);color:#0d1226;font:800 11px "Barlow Semi Condensed",sans-serif;font-style:italic;letter-spacing:.06em;padding:0 7px;margin-left:8px;transform:skewX(-14deg)}
+.panel{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--acc);padding:18px;margin-top:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.grp h3,.pos h3{font:700 14px "Barlow Semi Condensed",sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--acc);margin:0 0 8px;display:flex;gap:8px;align-items:center}
+.tag{font:400 11px Barlow;text-transform:none;letter-spacing:0;border:1px solid var(--line);padding:0 7px;border-radius:9px;color:var(--mut)}
+.tag.public{border-color:var(--acc);color:var(--acc)}.tag.declaré{color:var(--ink)}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:14px}dt{color:var(--mut)}dd{margin:0}
+.pos{margin-top:16px;font-size:14px;border-top:1px solid var(--line);padding-top:14px}.pos i{font-style:normal;font-weight:700;color:var(--acc)}
+.cmp td:first-child,.cmp th:first-child{color:var(--mut);font-weight:400;position:sticky;left:0;background:var(--card)}
+.mb{height:6px;background:var(--bar);margin-top:3px;min-width:2px;transform:skewX(-30deg)}
+.hint{color:var(--mut);font-size:13px}
+</style>
+</head>
+<body>
+<header class="hero"><svg class="prof" viewBox="0 0 1200 110" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd800" stop-opacity=".3"/><stop offset="1" stop-color="#ffd800" stop-opacity="0"/></linearGradient></defs><path d="M0 92L120 78 220 88 330 46 420 66 520 22 610 54 700 34 800 70 900 38 1010 60 1100 30 1200 52V110H0Z" fill="url(#g)"/><path d="M0 92L120 78 220 88 330 46 420 66 520 22 610 54 700 34 800 70 900 38 1010 60 1100 30 1200 52" fill="none" stroke="#ffd800" stroke-width="3" vector-effect="non-scaling-stroke"/></svg><div class="in"><span class="eyebrow">ASO · Démo · Données fictives</span><h1>Observatoire<br><em>des cyclosportives</em></h1><p class="sub">Situer les épreuves ASO face au marché, en France et à l'international.</p></div></header>
+<main>
+<div class="warn"><b>Données fictives, à titre de démonstration.</b> Les épreuves, organisateurs, lieux et tous les chiffres sont entièrement inventés. Ils ne correspondent à aucune donnée réelle ni confidentielle. Remplacez le tableau <code>DATA</code> (en haut du script) par vos données réelles, sur un dépôt privé.</div>
+<div class="kpis" id="kpis"></div>
+<div class="bar">
+<input id="q" type="search" placeholder="Rechercher une épreuve, un lieu…" aria-label="Rechercher">
+<select id="ft" aria-label="Type"><option value="">Tous types</option><option>Route</option><option>Gravel</option><option>VTT</option></select>
+<select id="fc" aria-label="Pays"><option value="">Tous pays</option></select>
+<select id="fo" aria-label="Organisateur"><option value="">Tous organisateurs</option><option value="aso">ASO</option><option value="autre">Autres</option></select>
+<select id="fh" aria-label="Chrono"><option value="">Chrono ou non</option><option value="1">Chronométrée</option><option value="0">Non chronométrée</option></select>
+<button id="cmpb">Comparer la sélection (0)</button>
+</div>
+<div class="wrap"><table><thead id="th"></thead><tbody id="tb"></tbody></table></div>
+<p class="hint">Cliquez sur une ligne pour le détail complet et le positionnement, cochez 2 à 4 épreuves pour les comparer. Cliquez sur un en-tête pour trier.</p>
+<div id="detail"></div>
+<div id="cmp"></div>
+</main>
+<script>
+const K="n,org,pl,c,d,t,ne,di,pr,pt,ph,pf,pro,dp,ch,lab,q,tl,amin,amax,fin,gd,rv,an,t1,tm,t2,sec,bv,ac,me,pa".split(",");
+const R=[
+["Étape des Cimes","ASO","Alpes du Nord","France","2026-07-12","Route",1,150,145,15000,13500,1500,"Haute montagne",4200,1,"UCI Gran Fondo","Non","Barrière 14h",18,80,88,"Maillot, médaille",6,1993,"4h40","8h10","11h30","Fermé",1200,"Bon","Média A","Partenaires fictifs"],
+["Classique des Pavés","ASO","Nord","France","2026-04-11","Route",3,172,72,7000,6500,500,"Pavés",1100,0,"—","Non","Barrière 15h",18,75,94,"Médaille, pavé",5,1977,"—","—","—","Ouvert",900,"Très bon","Média B","Partenaires fictifs"],
+["Classique des Ardennes","ASO","Ardennes","Belgique","2026-04-25","Route",3,156,65,4500,4100,400,"Vallonné",2800,0,"—","Non","Barrière 16h",18,75,91,"Médaille",5,1990,"—","—","—","Partiellement fermé",700,"Bon","Média B","Partenaires fictifs"],
+["Gran Fondo des Glaciers","Organisateur A","Alpes du Sud","France","2026-07-04","Route",3,174,130,6500,5900,600,"Haute montagne",5000,1,"UCI Gran Fondo","Non","Barrière 16h",18,80,87,"Maillot, médaille",7,1982,"5h55","9h05","12h00","Ouvert",500,"Moyen","Média C","Partenaires fictifs"],
+["Cyclo des Trois Vallées","Organisateur B","Alpes italiennes","Italie","2026-07-05","Route",3,138,120,9000,8100,900,"Haute montagne",4230,1,"UCI Gran Fondo","Tirage au sort","Barrière 15h",18,80,92,"Maillot, médaille, repas",9,1987,"4h40","7h20","10h00","Fermé",1000,"Moyen","Média A","Partenaires fictifs"],
+["Traversée des Pics","Organisateur C","Pyrénées espagnoles","Espagne","2026-06-20","Route",2,200,110,8000,7300,700,"Montagne",3600,1,"UCI Gran Fondo","Tirage au sort","Barrière 14h30",18,80,90,"Maillot, repas",8,1992,"6h40","10h10","14h00","Fermé",1500,"Moyen","Média C","Partenaires fictifs"],
+["Cyclo des Pics Bleus","Organisateur D","Pyrénées","France","2026-06-14","Route",3,160,75,3800,3100,700,"Montagne",3300,1,"—","Non","Barrière 15h",18,80,90,"Médaille",6,2008,"5h30","8h40","11h00","Ouvert",400,"Moyen","Média C","Partenaires fictifs"],
+["La Petite Boucle","Club local","Massif de l'Est","France","2026-06-07","Route",2,120,40,1900,1550,350,"Vallonné",2300,0,"—","Non","Libre",16,90,97,"Ravito, cadeau",4,1999,"—","—","—","Ouvert",250,"Moyen","Média C","Partenaires fictifs"],
+["Gravel des Crêtes","Organisateur E","Alpes","France","2026-09-19","Gravel",2,110,80,900,750,150,"Chemins",2500,1,"—","Non","Barrière 9h",18,70,93,"Médaille",4,2020,"3h55","5h50","8h30","Ouvert",150,"Moyen","Média C","Partenaires fictifs"],
+["Grand Gravel des Plaines","Organisateur F","Grandes Plaines","USA","2026-05-30","Gravel",5,320,270,4500,3800,700,"Chemins",3300,1,"—","Non","Barrière 20h",18,90,72,"Plaque, sticker",12,2006,"10h","17h","24h","Ouvert",1000,"Difficile","Média D","Partenaires fictifs"],
+["Raid des Sommets","Organisateur G","Pyrénées","France","2026-08-22","VTT",4,100,60,2300,1900,400,"Montagne",4000,1,"—","Non","Barrière 12h",18,70,80,"Médaille, repas",6,2005,"6h30","10h00","13h00","Ouvert",700,"Moyen","Média C","Partenaires fictifs"],
+["Tour de la Baie","Organisateur H","Côte sud","Afrique du Sud","2027-03-08","Route",2,109,95,35000,25500,9500,"Plat",800,1,"—","Non","Barrière 5h30",12,90,98,"Médaille",8,1978,"2h25","3h45","5h30","Fermé",2500,"Bon","Média D","Partenaires fictifs"],
+["Gran Fondo Metropolis","Organisateur I","Ville côtière","USA","2026-05-17","Route",3,100,225,4500,3700,800,"Vallonné",1600,0,"—","Non","Libre",16,90,97,"Maillot, buffet",6,2010,"—","—","—","Escorte police",600,"Très bon","Média D","Partenaires fictifs"],
+["Classique des Monts","Organisateur J","Collines flamandes","Belgique","2027-04-04","Route",3,175,70,16000,14200,1800,"Pavés",2100,0,"—","Non","Libre",16,80,95,"Médaille, bière",7,1986,"—","—","—","Ouvert",1000,"Très bon","Média B","Partenaires fictifs"]
+];
+const DATA=R.map(r=>Object.fromEntries(K.map((k,i)=>[k,r[i]])));
+DATA.forEach(e=>e.aso=e.org==="ASO");
+const G=[["Général","public",[["org","Organisateur"],["pl","Lieu"],["c","Pays"],["d","Date"],["t","Type"],["ne","Nb d'épreuves"],["an","Depuis (année)"]]],
+["Parcours","public",[["di","Distance (km)"],["dp","D+ (m)"],["pro","Profil"],["ch","Chrono"]]],
+["Inscription","public",[["pr","Prix (€)"],["lab","Label"],["q","Qualification"],["tl","Temps limite"],["amin","Âge min"],["amax","Âge max"],["gd","Goodies"]]],
+["Participants et résultats","estimé",[["pt","Participants"],["ph","Hommes"],["pf","Femmes"],["fin","Finishers (%)"],["t1","Temps 1er"],["tm","Temps moyen"],["t2","Temps dernier"]]],
+["Organisation","déclaré",[["sec","Sécurité"],["rv","Ravitaillements"],["bv","Bénévoles"],["ac","Accès"]]],
+["Visibilité","estimé",[["me","Média / audience"],["pa","Partenaires"]]]];
+const COLS=[["n","Épreuve"],["org","Organisateur"],["pl","Lieu"],["d","Date"],["t","Type"],["di","Km",1],["dp","D+",1],["pr","Prix €",1],["pt","Partic.",1],["fin","Finish %",1],["ch","Chrono"],["sec","Sécurité"]];
+const $=id=>document.getElementById(id);
+let sort={k:"d",dir:1},sel=new Set(),open=null;
+const fmt=(k,v)=>k==="ch"?(v?"Oui":"Non"):typeof v==="number"?v.toLocaleString("fr-FR"):v;
+[...new Set(DATA.map(e=>e.c))].sort().forEach(c=>$("fc").add(new Option(c,c)));
+$("th").innerHTML="<tr><th></th>"+COLS.map(c=>`<th class="${c[2]?"n":""}" tabindex="0" data-k="${c[0]}">${c[1]}</th>`).join("")+"</tr>";
+function med(a){a=a.slice().sort((x,y)=>x-y);const m=a.length>>1;return a.length%2?a[m]:(a[m-1]+a[m])/2}
+function filtered(){const q=$("q").value.toLowerCase();
+let r=DATA.filter(e=>(!q||(e.n+e.pl+e.c+e.org).toLowerCase().includes(q))&&(!$("ft").value||e.t===$("ft").value)&&(!$("fc").value||e.c===$("fc").value)
+&&(!$("fo").value||(e.aso?"aso":"autre")===$("fo").value)&&(!$("fh").value||String(e.ch)===$("fh").value));
+return r.sort((a,b)=>{const x=a[sort.k],y=b[sort.k];return (x>y?1:x<y?-1:0)*sort.dir})}
+function render(){const r=filtered();
+$("tb").innerHTML=r.map(e=>`<tr class="row ${open===e.n?"sel":""} ${e.aso?"isaso":""}" data-n="${e.n}"><td><input type="checkbox" aria-label="Comparer ${e.n}" ${sel.has(e.n)?"checked":""} data-c="${e.n}"></td>`+
+COLS.map(c=>`<td class="${c[2]?"n":""}">${c[0]==="n"?e.n+(e.aso?'<span class="aso">ASO</span>':""):fmt(c[0],e[c[0]])}</td>`).join("")+"</tr>").join("")||'<tr><td colspan="13">Aucune épreuve ne correspond. Élargissez les filtres.</td></tr>';
+const a=r.filter(e=>e.aso);
+$("kpis").innerHTML=[[r.length,"épreuves affichées"],[a.length,"épreuves ASO"],[r.length?Math.round(med(r.map(e=>e.pr))):"–","prix médian (€)"],[r.length?Math.round(med(r.map(e=>e.di))):"–","distance médiane (km)"],[r.length?Math.round(med(r.map(e=>e.dp))):"–","D+ médian (m)"]].map(k=>`<div class="kpi"><b>${k[0]}</b><span>${k[1]}</span></div>`).join("");
+$("cmpb").textContent=`Comparer la sélection (${sel.size})`}
+function pos(e){const peers=DATA.filter(x=>x.t===e.t&&x!==e);if(peers.length<2)return"";
+return `<div class="pos"><h3>Positionnement face aux ${peers.length} autres épreuves de type ${e.t}</h3>`+[["di","Distance","km"],["dp","D+","m"],["pr","Prix","€"],["pt","Participants",""]].map(([k,l,u])=>{const m=med(peers.map(x=>x[k])),p=Math.round((e[k]/m-1)*100);return `${l} : ${fmt(k,e[k])} ${u} (médiane ${Math.round(m).toLocaleString("fr-FR")}) → <i>${p>=0?"+":""}${p} %</i><br>`}).join("")+"</div>"}
+function showDetail(n){const e=DATA.find(x=>x.n===n);open=n;
+$("detail").innerHTML=`<div class="panel"><h2>${e.n}${e.aso?'<span class="aso">ASO</span>':""}</h2><div class="grid">`+G.map(g=>`<div class="grp"><h3>${g[0]}<span class="tag ${g[1]}">${g[1]}</span></h3><dl>`+g[2].map(([k,l])=>`<dt>${l}</dt><dd>${fmt(k,e[k])}</dd>`).join("")+"</dl></div>").join("")+"</div>"+pos(e)+"</div>";
+render();$("detail").scrollIntoView({behavior:"smooth",block:"nearest"})}
+function compare(){const s=DATA.filter(e=>sel.has(e.n));
+if(s.length<2){$("cmp").innerHTML='<div class="panel">Cochez 2 à 4 épreuves dans le tableau pour les comparer.</div>';return}
+const num=["di","dp","pr","pt","fin"];
+$("cmp").innerHTML=`<div class="panel"><h2>Comparaison</h2><div class="wrap"><table class="cmp"><thead><tr><th></th>${s.map(e=>`<th>${e.n}</th>`).join("")}</tr></thead><tbody>`+
+G.flatMap(g=>g[2]).filter(([k])=>k!=="pl").map(([k,l])=>{const mx=Math.max(...s.map(e=>+e[k]||0));
+return `<tr><td>${l}</td>${s.map(e=>`<td>${fmt(k,e[k])}${num.includes(k)&&mx?`<div class="mb" style="width:${Math.round(e[k]/mx*100)}%"></div>`:""}</td>`).join("")}</tr>`}).join("")+"</tbody></table></div></div>";
+$("cmp").scrollIntoView({behavior:"smooth",block:"nearest"})}
+$("th").onclick=ev=>{const k=ev.target.dataset.k;if(!k)return;sort=sort.k===k?{k,dir:-sort.dir}:{k,dir:1};render()};
+$("th").onkeydown=ev=>{if(ev.key==="Enter")ev.target.click()};
+$("tb").onclick=ev=>{const c=ev.target.dataset.c;if(c){ev.target.checked&&sel.size>=4?(ev.target.checked=false):(ev.target.checked?sel.add(c):sel.delete(c));render();return}
+const tr=ev.target.closest("tr.row");if(tr)showDetail(tr.dataset.n)};
+$("cmpb").onclick=compare;
+["q","ft","fc","fo","fh"].forEach(i=>$(i).oninput=render);
+render();
+</script>
+</body>
+</html>
